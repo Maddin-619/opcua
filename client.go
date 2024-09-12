@@ -247,6 +247,7 @@ func (c *Client) Connect(ctx context.Context) error {
 	}
 
 	if err := c.ActivateSession(ctx, s); err != nil {
+		c.closeSession(ctx, s)
 		c.Close(ctx)
 		stats.RecordError(err)
 
